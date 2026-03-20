@@ -10,7 +10,7 @@ Upload a VCF file → the platform identifies your mutations, classifies their p
 
 ```bash
 # 1. Clone
-git clone https://github.com/openoncology/openoncology
+git clone https://github.com/immortal71/openoncology
 cd openoncology
 
 # 2. Configure secrets
@@ -30,6 +30,48 @@ open http://localhost:8080        # Keycloak admin  (admin / from .env)
 ```
 
 The first `docker compose up` also runs Alembic migrations and creates MinIO buckets automatically.
+
+---
+
+## Platform Documents
+
+| Document | Description |
+|---|---|
+| [📄 OpenOncology_Project_Concept.pdf](OpenOncology_Project_Concept.pdf) | Full project concept — vision, business model, and technical overview |
+| [📝 OpenOncology_TechStack.docx](OpenOncology_TechStack.docx) | Detailed tech stack breakdown and architecture decisions |
+
+---
+
+## Patient Journey Flowchart
+
+```mermaid
+flowchart TD
+    A([🧬 Patient submits sample\nBiopsy + germline DNA test]) --> B
+
+    B[🤖 AI genomic analysis\nAlphaFold · AlphaMissense · NGS pipeline]
+
+    B --> C{Targeted mutation found?\nPlatform reports result clearly}
+
+    C -- No --> D([🏥 General medicine])
+
+    C -- Yes --> E[🔬 AI searches for medicine\nAlphaFold + OpenTargets + DrugBank]
+    C -- Yes --> F([🏥 General medicine\nin the meantime])
+
+    E --> G{Existing drug near-match found?\nDrug repurposing search}
+
+    G -- Yes --> H([✅ Option 1\nRepurpose existing drug])
+
+    G -- "No / patient has funds" --> I[💊 Option 2: Custom drug order\nPlatform connects to pharma companies]
+
+    I --> J[🏭 Pharma companies bid\nTransparent cost · patient chooses]
+
+    J --> K([🧪 Custom medicine manufactured\nMade for this patient's specific mutation])
+    J --> L([❓ Can't afford it?\nCrowdfund module])
+
+    K --> M([🎯 Patient receives treatment])
+    L --> M
+    H --> M
+```
 
 ---
 
@@ -134,5 +176,4 @@ This platform is for research and educational use only. Genomic analysis results
 
 ---
 
-MIT License · [github.com/openoncology](https://github.com/openoncology)
-
+MIT License · [github.com/immortal71/openoncology](https://github.com/immortal71/openoncology)
