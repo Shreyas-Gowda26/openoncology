@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useQuery } from "@tanstack/react-query";
 import { motion } from "framer-motion";
@@ -27,7 +27,7 @@ const statusColors: Record<string, string> = {
 
 /** AlphaMissense score badge: red = pathogenic, amber = uncertain, green = benign */
 function ScoreBadge({ score }: { score: number | null | undefined }) {
-  if (score == null) return <span className="text-gray-300 text-xs">—</span>;
+  if (score == null) return <span className="text-gray-300 text-xs">â€”</span>;
   const pct = Math.round(score * 100);
   const color =
     score >= 0.564
@@ -74,9 +74,9 @@ function ApprovalBadge({ status }: { status: string }) {
   );
 }
 
-/** Progress bar for binding score (0–1 scale) */
+/** Progress bar for binding score (0â€“1 scale) */
 function BindingBar({ score }: { score: number | null | undefined }) {
-  if (score == null) return <span className="text-gray-300 text-xs">—</span>;
+  if (score == null) return <span className="text-gray-300 text-xs">â€”</span>;
   const pct = Math.max(0, Math.min(100, Math.round(score * 100)));
   const color = pct >= 70 ? "bg-green-500" : pct >= 40 ? "bg-yellow-400" : "bg-gray-300";
   return (
@@ -155,11 +155,11 @@ export default function ResultsPage({ params }: { params: { id: string } }) {
     <main className="min-h-screen bg-gray-50 py-12 px-4">
       <div className="max-w-4xl mx-auto space-y-8">
 
-        {/* ── HEADER ── */}
+        {/* â”€â”€ HEADER â”€â”€ */}
         <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}>
           <h1 className="text-3xl font-bold text-gray-900 mb-1">Your Results</h1>
           <p className="text-gray-500 text-sm flex flex-wrap items-center gap-2">
-            <span>{data.cancer_type} · Submission {params.id.slice(0, 8)}</span>
+            <span>{data.cancer_type} Â· Submission {params.id.slice(0, 8)}</span>
             {data.oncologist_reviewed && (
               <span className="bg-green-100 text-green-700 text-xs px-2 py-0.5 rounded-full flex items-center gap-1">
                 <ShieldCheck size={12} /> Oncologist reviewed
@@ -168,7 +168,7 @@ export default function ResultsPage({ params }: { params: { id: string } }) {
           </p>
         </motion.div>
 
-        {/* ══ SECTION 1: Plain-language summary ══════════════════════════════ */}
+        {/* â•â• SECTION 1: Plain-language summary â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
         {data.plain_language_summary && (
           <motion.div
             initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.05 }}
@@ -178,7 +178,7 @@ export default function ResultsPage({ params }: { params: { id: string } }) {
               <BookOpen className="text-blue-600" size={20} />
               <h2 className="font-bold text-blue-900 text-lg">What this means for you</h2>
               <span className="ml-auto text-xs bg-blue-100 text-blue-600 px-2 py-0.5 rounded-full shrink-0">
-                AI-generated · plain language
+                AI-generated Â· plain language
               </span>
             </div>
             <p className="text-gray-800 text-base leading-relaxed whitespace-pre-line">
@@ -187,7 +187,7 @@ export default function ResultsPage({ params }: { params: { id: string } }) {
           </motion.div>
         )}
 
-        {/* ══ SECTION 2: Mutation details ═════════════════════════════════════ */}
+        {/* â•â• SECTION 2: Mutation details â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
         <motion.div
           initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
           className="space-y-3"
@@ -202,7 +202,7 @@ export default function ResultsPage({ params }: { params: { id: string } }) {
             <div className="bg-green-50 border border-green-300 rounded-xl px-5 py-4 flex items-start gap-3">
               <Award size={20} className="text-green-600 mt-0.5 shrink-0" />
               <div>
-                <p className="font-bold text-green-800 text-sm">OncoKB Level 1 — FDA-approved drug exists for this exact mutation</p>
+                <p className="font-bold text-green-800 text-sm">OncoKB Level 1 â€” FDA-approved drug exists for this exact mutation</p>
                 <p className="text-green-700 text-xs mt-0.5">
                   Your oncologist can prescribe an approved therapy targeting this specific mutation. Ask about it at your next appointment.
                 </p>
@@ -227,8 +227,8 @@ export default function ResultsPage({ params }: { params: { id: string } }) {
                 {(data.mutations ?? []).map((m: Record<string, unknown>, i: number) => (
                   <tr key={i} className="border-b border-gray-50 last:border-0 hover:bg-gray-50 transition-colors">
                     <td className="p-4 font-mono font-bold text-blue-700">{m.gene as string}</td>
-                    <td className="p-4 font-mono text-xs text-gray-500 max-w-[180px] truncate">{(m.hgvs as string) ?? "—"}</td>
-                    <td className="p-4 text-gray-500 text-xs capitalize">{(m.mutation_type as string) ?? "—"}</td>
+                    <td className="p-4 font-mono text-xs text-gray-500 max-w-[180px] truncate">{(m.hgvs as string) ?? "â€”"}</td>
+                    <td className="p-4 text-gray-500 text-xs capitalize">{(m.mutation_type as string) ?? "â€”"}</td>
                     <td className="p-4"><ScoreBadge score={m.alphamissense_score as number | null} /></td>
                     <td className="p-4"><ClassBadge cls={m.classification as string} /></td>
                     <td className="p-4">
@@ -240,12 +240,12 @@ export default function ResultsPage({ params }: { params: { id: string } }) {
                         }`}>
                           Level {m.oncokb_level as string}
                         </span>
-                      ) : <span className="text-gray-300 text-xs">—</span>}
+                      ) : <span className="text-gray-300 text-xs">â€”</span>}
                     </td>
                     <td className="p-4">
                       {m.is_targetable
                         ? <CheckCircle className="text-green-500" size={16} />
-                        : <span className="text-gray-300">—</span>}
+                        : <span className="text-gray-300">â€”</span>}
                     </td>
                   </tr>
                 ))}
@@ -254,7 +254,7 @@ export default function ResultsPage({ params }: { params: { id: string } }) {
           </div>
         </motion.div>
 
-        {/* ══ SECTION 3: COSMIC + cBioPortal frequency ════════════════════════ */}
+        {/* â•â• SECTION 3: COSMIC + cBioPortal frequency â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
         {((data.cbioportal_data?.length ?? 0) > 0 || data.cosmic_sample_count) && (
           <motion.div
             initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.15 }}
@@ -269,14 +269,14 @@ export default function ResultsPage({ params }: { params: { id: string } }) {
               <div className="bg-purple-50 border border-purple-100 rounded-xl px-5 py-4 text-sm text-purple-900">
                 <span className="font-bold text-purple-800 text-base">
                   {parseInt(data.cosmic_sample_count).toLocaleString()}
-                </span>{" "}tumour samples in COSMIC carry this {data.target_gene ?? ""} mutation — showing how commonly it appears in cancer genomes worldwide.
+                </span>{" "}tumour samples in COSMIC carry this {data.target_gene ?? ""} mutation â€” showing how commonly it appears in cancer genomes worldwide.
               </div>
             )}
 
             {(data.cbioportal_data?.length ?? 0) > 0 && (
               <div className="bg-white rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
                 <div className="px-4 py-3 border-b border-gray-50 text-xs text-gray-400">
-                  cBioPortal · mutation frequency across cancer studies
+                  cBioPortal Â· mutation frequency across cancer studies
                 </div>
                 <table className="w-full text-sm">
                   <thead className="bg-gray-50 border-b border-gray-100">
@@ -311,7 +311,7 @@ export default function ResultsPage({ params }: { params: { id: string } }) {
           </motion.div>
         )}
 
-        {/* ══ SECTION 4: Drug repurposing candidates ══════════════════════════ */}
+        {/* â•â• SECTION 4: Drug repurposing candidates â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
         {candidates.length > 0 && (
           <motion.div
             initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
@@ -365,7 +365,7 @@ export default function ResultsPage({ params }: { params: { id: string } }) {
           </motion.div>
         )}
 
-        {/* ══ SECTION 5: Oncologist validation ════════════════════════════════ */}
+        {/* â•â• SECTION 5: Oncologist validation â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
         <motion.div
           initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.25 }}
         >
@@ -381,7 +381,7 @@ export default function ResultsPage({ params }: { params: { id: string } }) {
                     {(data as Record<string, unknown>).oncologist_name as string}
                   </span>
                   {(data as Record<string, unknown>).oncologist_institution && (
-                    <span className="text-gray-400"> · {(data as Record<string, unknown>).oncologist_institution as string}</span>
+                    <span className="text-gray-400"> Â· {(data as Record<string, unknown>).oncologist_institution as string}</span>
                   )}
                 </div>
               )}
@@ -397,7 +397,7 @@ export default function ResultsPage({ params }: { params: { id: string } }) {
               <div>
                 <p className="font-semibold text-gray-500 text-sm">Pending oncologist review</p>
                 <p className="text-gray-400 text-xs mt-1">
-                  A qualified oncologist will review your results within 3–5 business days and add clinical context. You will be notified by email.
+                  A qualified oncologist will review your results within 3â€“5 business days and add clinical context. You will be notified by email.
                 </p>
               </div>
             </div>
@@ -407,251 +407,6 @@ export default function ResultsPage({ params }: { params: { id: string } }) {
         <p className="text-xs text-gray-400 text-center pb-8">
           This analysis is for informational purposes only and does not constitute medical advice.
           Always consult a qualified oncologist before making any treatment decisions.
-        </p>
-      </div>
-    </main>
-  );
-}
-
-  if (isLoading) {
-    return (
-      <main className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4" />
-          <p className="text-gray-500">Loading your results...</p>
-        </div>
-      </main>
-    );
-  }
-
-  if (error || !data) {
-    return (
-      <main className="min-h-screen bg-gray-50 flex items-center justify-center p-6">
-        <div className="text-center">
-          <AlertTriangle className="text-red-400 mx-auto mb-4" size={48} />
-          <p className="text-gray-700 font-semibold">Could not load results</p>
-          <p className="text-gray-400 text-sm mt-2">Submission not found or access denied.</p>
-        </div>
-      </main>
-    );
-  }
-
-  if (data.status !== "complete") {
-    return (
-      <main className="min-h-screen bg-gray-50 flex items-center justify-center p-6">
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          className="bg-white rounded-2xl p-10 max-w-md w-full text-center shadow-md"
-        >
-          <Clock className="text-blue-500 mx-auto mb-4 animate-pulse" size={48} />
-          <h2 className="text-xl font-bold text-gray-900 mb-2">Analysis in progress</h2>
-          <span className={`inline-block px-3 py-1 rounded-full text-sm font-medium ${statusColors[data.status] ?? ""}`}>
-            {data.status}
-          </span>
-          <p className="text-gray-500 text-sm mt-4">{data.message}</p>
-          <p className="text-gray-400 text-xs mt-2">This page refreshes automatically.</p>
-        </motion.div>
-      </main>
-    );
-  }
-
-  return (
-    <main className="min-h-screen bg-gray-50 py-12 px-4">
-      <div className="max-w-4xl mx-auto space-y-8">
-
-        {/* ── HEADER ── */}
-        <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}>
-          <h1 className="text-3xl font-bold text-gray-900 mb-1">Your Results</h1>
-          <p className="text-gray-500 text-sm flex flex-wrap items-center gap-2">
-            <span>{data.cancer_type} · Submission {params.id.slice(0, 8)}</span>
-            {data.oncologist_reviewed && (
-              <span className="bg-green-100 text-green-700 text-xs px-2 py-0.5 rounded-full flex items-center gap-1">
-                <ShieldCheck size={12} /> Oncologist reviewed
-              </span>
-            )}
-          </p>
-        </motion.div>
-
-        {/* ── PLAIN-LANGUAGE SUMMARY ── */}
-        {data.plain_language_summary && (
-          <motion.div
-            initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.05 }}
-            className="bg-blue-50 border border-blue-100 rounded-2xl p-6"
-          >
-            <div className="flex items-center gap-2 mb-3">
-              <BookOpen className="text-blue-600" size={20} />
-              <h2 className="font-bold text-blue-900 text-base">What this means for you</h2>
-              <span className="ml-auto text-xs bg-blue-100 text-blue-600 px-2 py-0.5 rounded-full">
-                AI-generated · plain language
-              </span>
-            </div>
-            <p className="text-gray-700 text-sm leading-relaxed whitespace-pre-line">
-              {data.plain_language_summary}
-            </p>
-          </motion.div>
-        )}
-
-        {/* ── MUTATION VERDICT ── */}
-        <motion.div
-          initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
-          className={`rounded-2xl p-6 ${data.has_targetable_mutation ? "bg-green-50 border border-green-200" : "bg-orange-50 border border-orange-200"}`}
-        >
-          {data.has_targetable_mutation
-            ? <CheckCircle className="text-green-600 mb-3" size={28} />
-            : <AlertTriangle className="text-orange-500 mb-3" size={28} />
-          }
-          <h2 className="font-bold text-gray-900 mb-2 text-lg">
-            {data.has_targetable_mutation
-              ? `Targetable mutation found in ${data.target_gene}`
-              : "No currently targetable mutations found"}
-          </h2>
-          <p className="text-gray-700 text-sm leading-relaxed">{data.summary}</p>
-          {data.cosmic_sample_count && parseInt(data.cosmic_sample_count) > 0 && (
-            <div className="mt-4 inline-flex items-center gap-2 bg-white border border-gray-200 rounded-xl px-3 py-2 text-sm">
-              <Globe className="text-gray-400" size={14} />
-              <span className="text-gray-600">
-                <span className="font-semibold text-gray-900">
-                  {parseInt(data.cosmic_sample_count).toLocaleString()}
-                </span>{" "}tumour samples in COSMIC carry this mutation
-              </span>
-            </div>
-          )}
-        </motion.div>
-
-        {/* ── ACTIONS ── */}
-        {data.has_targetable_mutation && (
-          <motion.div
-            initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.15 }}
-            className="flex gap-3 flex-wrap"
-          >
-            {data.result_id && (
-              <Link
-                href={`/repurposing/${data.result_id}`}
-                className="flex items-center gap-2 bg-blue-600 text-white px-5 py-2.5 rounded-xl text-sm font-semibold hover:bg-blue-700 transition-colors"
-              >
-                <FlaskConical size={16} /> View Drug Repurposing Options
-              </Link>
-            )}
-            <Link
-              href="/marketplace"
-              className="flex items-center gap-2 border border-gray-200 px-5 py-2.5 rounded-xl text-sm font-semibold text-gray-700 hover:border-gray-400 transition-colors"
-            >
-              Pharma Marketplace
-            </Link>
-            <Link
-              href={`/marketplace/requests/new?result_id=${data.result_id}&gene=${data.target_gene ?? ""}`}
-              className="flex items-center gap-2 border border-blue-200 text-blue-700 px-5 py-2.5 rounded-xl text-sm font-semibold hover:border-blue-400 transition-colors"
-            >
-              Request Custom Drug Synthesis
-            </Link>
-          </motion.div>
-        )}
-
-        {/* ── ONCOLOGIST NOTES ── */}
-        {data.oncologist_reviewed && data.oncologist_notes && (
-          <motion.div
-            initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.18 }}
-            className="bg-white border border-green-200 rounded-2xl p-6"
-          >
-            <div className="flex items-center gap-2 mb-3">
-              <ShieldCheck className="text-green-600" size={18} />
-              <h3 className="font-bold text-gray-900">Oncologist Notes</h3>
-            </div>
-            <p className="text-gray-700 text-sm leading-relaxed">{data.oncologist_notes}</p>
-          </motion.div>
-        )}
-
-        {/* ── MUTATIONS TABLE ── */}
-        {data.mutations && data.mutations.length > 0 && (
-          <motion.div
-            initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
-          >
-            <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
-              <Dna size={20} className="text-blue-500" />
-              Mutations Found ({data.mutations.length})
-            </h3>
-            <div className="bg-white rounded-2xl border border-gray-100 overflow-x-auto shadow-sm">
-              <table className="w-full text-sm min-w-[640px]">
-                <thead className="bg-gray-50 border-b border-gray-100">
-                  <tr>
-                    <th className="text-left p-4 font-semibold text-gray-600">Gene</th>
-                    <th className="text-left p-4 font-semibold text-gray-600">HGVS</th>
-                    <th className="text-left p-4 font-semibold text-gray-600">Type</th>
-                    <th className="text-left p-4 font-semibold text-gray-600">AlphaMissense</th>
-                    <th className="text-left p-4 font-semibold text-gray-600">Classification</th>
-                    <th className="text-left p-4 font-semibold text-gray-600">OncoKB</th>
-                    <th className="text-left p-4 font-semibold text-gray-600">Targetable</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {data.mutations.map((m: Record<string, unknown>, i: number) => (
-                    <tr key={i} className="border-b border-gray-50 last:border-0 hover:bg-gray-50 transition-colors">
-                      <td className="p-4 font-mono font-semibold text-blue-700">{m.gene as string}</td>
-                      <td className="p-4 font-mono text-xs text-gray-500">{(m.hgvs as string) ?? "—"}</td>
-                      <td className="p-4 text-gray-500 text-xs">{(m.mutation_type as string) ?? "—"}</td>
-                      <td className="p-4"><ScoreBadge score={m.alphamissense_score as number | null} /></td>
-                      <td className="p-4"><ClassBadge cls={m.classification as string} /></td>
-                      <td className="p-4 text-gray-500 text-xs font-mono">{(m.oncokb_level as string) ?? "—"}</td>
-                      <td className="p-4">
-                        {m.is_targetable
-                          ? <CheckCircle className="text-green-500" size={16} />
-                          : <span className="text-gray-300">—</span>}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </motion.div>
-        )}
-
-        {/* ── cBIOPORTAL COHORT DATA ── */}
-        {(data.cbioportal_data?.length ?? 0) > 0 && (
-          <motion.div
-            initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.25 }}
-          >
-            <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
-              <BarChart2 size={20} className="text-purple-500" />
-              Population Context — cBioPortal
-              <span className="text-xs font-normal text-gray-400 ml-1">mutation frequency across cancer studies</span>
-            </h3>
-            <div className="bg-white rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
-              <table className="w-full text-sm">
-                <thead className="bg-gray-50 border-b border-gray-100">
-                  <tr>
-                    <th className="text-left p-4 font-semibold text-gray-600">Study</th>
-                    <th className="text-left p-4 font-semibold text-gray-600">Cancer Type</th>
-                    <th className="text-right p-4 font-semibold text-gray-600">Samples with Mutation</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {data.cbioportal_data!.slice(0, 6).map((row, i) => (
-                    <tr key={i} className="border-b border-gray-50 last:border-0">
-                      <td className="p-4 font-mono text-xs text-blue-600">{row.study_id}</td>
-                      <td className="p-4 text-gray-600 capitalize">{row.cancer_type}</td>
-                      <td className="p-4 text-right">
-                        <span className="inline-flex items-center gap-1 justify-end">
-                          <Users size={13} className="text-gray-400" />
-                          <span className="font-semibold text-gray-900">{row.mutation_count}</span>
-                        </span>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-              {(data.cbioportal_data!.length) > 6 && (
-                <p className="text-center text-xs text-gray-400 py-3">
-                  Showing 6 of {data.cbioportal_data!.length} studies
-                </p>
-              )}
-            </div>
-          </motion.div>
-        )}
-
-        <p className="text-xs text-gray-400 text-center pb-8">
-          This analysis is for informational purposes only and does not constitute medical advice.
-          Always consult a qualified oncologist before making treatment decisions.
         </p>
       </div>
     </main>

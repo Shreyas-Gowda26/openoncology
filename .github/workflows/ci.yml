@@ -104,7 +104,10 @@ jobs:
         run: alembic upgrade head
 
       - name: Run tests
-        run: pytest tests/ -v --tb=short
+        working-directory: ${{ github.workspace }}
+        run: pytest ai/tests/ -v --tb=short
+        env:
+          PYTHONPATH: ${{ github.workspace }}
 
   # ── Docker build check ────────────────────────────────────────────────────
   docker-build:
