@@ -18,7 +18,8 @@ receives funds directly minus Stripe fees.
 """
 import logging
 import stripe
-from fastapi import APIRouter, Depends, HTTPException, Request, status
+from fastapi import APIRouter, Depends, HTTPException, Request
+from pydantic import BaseModel as _BaseModel
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from api.config import settings
@@ -133,7 +134,6 @@ class PayoutRequest:
         self.amount_usd = amount_usd
         self.description = description
 
-from pydantic import BaseModel as _BaseModel
 
 class PayoutBody(_BaseModel):
     amount_usd: float

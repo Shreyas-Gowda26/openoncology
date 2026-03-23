@@ -3,7 +3,6 @@ Storage service — encrypted file upload/download via MinIO (S3-compatible).
 All patient genomic files are stored with AES-256 server-side encryption.
 """
 import uuid
-from datetime import datetime
 
 import boto3
 from botocore.config import Config

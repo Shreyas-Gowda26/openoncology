@@ -12,7 +12,6 @@ This service enriches a patient mutation with population-level data:
   - Survival statistics from matched cohorts (where available)
 """
 import logging
-from typing import Optional
 
 import httpx
 

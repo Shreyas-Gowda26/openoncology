@@ -8,7 +8,6 @@ from sqlalchemy.orm import selectinload
 
 from database import get_db
 from models.result import Result
-from models.repurposing import RepurposingCandidate
 from models.submission import Submission
 from models.patient import Patient
 from routes.auth import get_current_patient

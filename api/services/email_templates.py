@@ -166,7 +166,7 @@ def render_order_confirmed(
 ) -> tuple[str, str]:
     body = f"""
 {_h1("Order confirmed")}
-{_p(f"Your order has been confirmed and payment received. The manufacturer has been notified.")}
+{_p("Your order has been confirmed and payment received. The manufacturer has been notified.")}
 <table width="100%" cellpadding="0" cellspacing="0" style="border:1px solid {_border};border-radius:8px;margin-bottom:24px;">
   <tr><td style="padding:12px 16px;border-bottom:1px solid {_border};">
     <span style="font-size:12px;color:{_MUTED};">Drug</span><br/>

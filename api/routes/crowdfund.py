@@ -86,7 +86,7 @@ async def create_campaign(
 async def get_campaign(slug: str, db: AsyncSession = Depends(get_db)):
     """Public campaign page — no auth required for public campaigns."""
     campaign = (await db.execute(
-        select(Campaign).where(Campaign.slug == slug, Campaign.is_public == True, Campaign.is_active == True)
+        select(Campaign).where(Campaign.slug == slug, Campaign.is_public, Campaign.is_active)
     )).scalar_one_or_none()
 
     if not campaign:
@@ -114,7 +114,7 @@ async def donate_to_campaign(
     db: AsyncSession = Depends(get_db),
 ):
     campaign = (await db.execute(
-        select(Campaign).where(Campaign.slug == slug, Campaign.is_public == True, Campaign.is_active == True)
+        select(Campaign).where(Campaign.slug == slug, Campaign.is_public, Campaign.is_active)
     )).scalar_one_or_none()
 
     if not campaign:

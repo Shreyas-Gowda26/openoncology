@@ -12,10 +12,8 @@ Default limits:
 
 Limits are per-IP (X-Forwarded-For trusted via nginx ingress).
 """
-from slowapi import Limiter, _rate_limit_exceeded_handler
+from slowapi import Limiter
 from slowapi.util import get_remote_address
-from slowapi.errors import RateLimitExceeded
-from fastapi import Request
 
 # Initialise with Redis as the storage backend when available, else in-memory
 def _make_limiter() -> Limiter:

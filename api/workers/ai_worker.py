@@ -313,7 +313,7 @@ def _query_oncokb(gene: str, hgvs: str | None) -> dict | None:
 
     try:
         resp = httpx.get(
-            f"https://www.oncokb.org/api/v1/annotate/mutations/byProteinChange",
+            "https://www.oncokb.org/api/v1/annotate/mutations/byProteinChange",
             params={"hugoSymbol": gene, "alteration": hgvs or ""},
             headers={"Authorization": f"Bearer {settings.oncokb_api_token}"},
             timeout=10,

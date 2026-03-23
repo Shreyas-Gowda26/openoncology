@@ -9,8 +9,6 @@ from sqlalchemy.orm import selectinload
 from database import get_db
 from models.submission import Submission
 from models.patient import Patient
-from models.result import Result
-from models.mutation import Mutation
 from routes.auth import get_current_patient
 
 router = APIRouter(prefix="/api/results", tags=["results"])

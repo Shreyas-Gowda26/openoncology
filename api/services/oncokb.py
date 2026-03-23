@@ -3,7 +3,6 @@
 Docs: https://api.oncokb.org/api/v1/
 Uses the Bearer token from settings.ONCOKB_API_TOKEN.
 """
-import asyncio
 import logging
 from typing import Optional
 import httpx

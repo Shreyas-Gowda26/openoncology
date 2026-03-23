@@ -28,7 +28,7 @@ async def list_pharma_companies(
 ):
     """Public list of verified pharma manufacturers."""
     companies = (await db.execute(
-        select(PharmaCompany).where(PharmaCompany.verified == True)
+        select(PharmaCompany).where(PharmaCompany.verified)
     )).scalars().all()
 
     return [
@@ -66,7 +66,7 @@ async def create_order(
     pharma = (await db.execute(
         select(PharmaCompany).where(
             PharmaCompany.id == req.pharma_id,
-            PharmaCompany.verified == True,
+            PharmaCompany.verified,
         )
     )).scalar_one_or_none()
     if not pharma:
@@ -180,8 +180,6 @@ async def submit_bid(
     The pharma company must be verified and have a linked Stripe account.
     Auth token must belong to the pharma admin account.
     """
-    keycloak_id = token_payload.get("sub")
-
     pharma = (await db.execute(
         select(PharmaCompany).where(
             PharmaCompany.contact_email == token_payload.get("email"),

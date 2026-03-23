@@ -12,7 +12,6 @@ import subprocess
 import tempfile
 import os
 import logging
-from datetime import datetime
 
 from workers import celery_app
 
