@@ -413,12 +413,6 @@ export default function ResultsPage({ params }: { params: { id: string } }) {
   );
 }
 
-    queryKey: ["results", params.id],
-    queryFn: () => api.getResults(params.id),
-    refetchInterval: (data) =>
-      data?.status !== "complete" && data?.status !== "failed" ? 10000 : false,
-  });
-
   if (isLoading) {
     return (
       <main className="min-h-screen bg-gray-50 flex items-center justify-center">

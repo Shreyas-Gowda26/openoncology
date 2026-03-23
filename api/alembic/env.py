@@ -7,8 +7,8 @@ from sqlalchemy import pool
 from sqlalchemy.ext.asyncio import async_engine_from_config
 
 # Must import all models so Alembic can see their metadata
-from api.database import Base  # noqa: F401
-from api.models import (  # noqa: F401
+from database import Base  # noqa: F401
+from models import (  # noqa: F401
     patient,
     submission,
     mutation,
@@ -19,7 +19,7 @@ from api.models import (  # noqa: F401
     order,
     oncologist,
 )
-from api.config import settings
+from config import settings
 
 # Alembic Config
 config = context.config
