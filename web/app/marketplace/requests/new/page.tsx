@@ -8,14 +8,14 @@ export const dynamic = "force-dynamic";
  * from the results page "Request Custom Drug Synthesis" button.
  */
 
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { FlaskConical, ArrowLeft, Info } from "lucide-react";
 import Link from "next/link";
 import { api } from "@/lib/api";
 
-export default function NewDrugRequestPage() {
+function NewDrugRequestContent() {
   const params = useSearchParams();
   const router = useRouter();
 
@@ -213,5 +213,13 @@ export default function NewDrugRequestPage() {
         </div>
       </motion.div>
     </main>
+  );
+}
+
+export default function NewDrugRequestPage() {
+  return (
+    <Suspense>
+      <NewDrugRequestContent />
+    </Suspense>
   );
 }
