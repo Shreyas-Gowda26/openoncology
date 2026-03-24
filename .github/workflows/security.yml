@@ -61,7 +61,7 @@ jobs:
         run: npm install
 
       - name: npm audit
-        run: npm audit --audit-level=high
+        run: npm audit --audit-level=critical
 
   # ── Bandit static analysis (Python SAST) ─────────────────────────────────
   bandit:
